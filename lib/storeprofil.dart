@@ -20,16 +20,15 @@ class SecondScreen extends StatelessWidget {
     longDesc.text = data["long_description"];
   }
 
-  void postData(){
+  void postData() {
     http.post(Uri.encodeFull(
-        "https://4t7r04wmqf.execute-api.ap-southeast-2.amazonaws.com/v1/merchant/gladiator_fitness"),
-    body: {"name");
+        "https://4t7r04wmqf.execute-api.ap-southeast-2.amazonaws.com/v1/merchant/gladiator_fitness"));
   }
+
   final name = TextEditingController();
   final storeUrl = TextEditingController();
   final shortDesc = TextEditingController();
   final longDesc = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
