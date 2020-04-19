@@ -1,11 +1,23 @@
 import 'dart:async';
 import 'dart:convert' as JSON;
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class SecondScreen extends StatelessWidget {
+class SecondScreen extends StatefulWidget {
+  @override
+  _SecondScreenState createState() => _SecondScreenState();
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+  String _path = '-';
+  bool _pickFileInProgress = false;
+  bool _iosPublicDataUTI = true;
+  bool _checkByCustomExtension = false;
+  bool _checkByMimeType = false;
+
   Map data;
 
   Future<String> getData() async {
@@ -40,8 +52,11 @@ class SecondScreen extends StatelessWidget {
   }
 
   final name = TextEditingController();
+
   final storeUrl = TextEditingController();
+
   final shortDesc = TextEditingController();
+
   final longDesc = TextEditingController();
 
   @override
@@ -184,13 +199,16 @@ class SecondScreen extends StatelessWidget {
                   ),
                   Wrap(
                     children: <Widget>[
-                      Container(
-                        color: Colors.blue[100],
-                        width: 250,
-                        height: 150,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
+                      FlatButton(
+                        onPressed: openFilePicker,
+                        child: Container(
+                          color: Colors.blue[100],
+                          width: 250,
+                          height: 150,
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -267,5 +285,10 @@ class SecondScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  openFilePicker() async {
+    print('Pick file');
+    var file = await FilePicker.getFile();
   }
 }
